@@ -2,10 +2,15 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
+	let greet = "Hello World!"
+    
+    let platform = Platform()
+    
 	var body: some View {
 		Text(greet)
+            .onAppear{
+                platform.logSystemInfo()
+            }
 	}
 }
 
