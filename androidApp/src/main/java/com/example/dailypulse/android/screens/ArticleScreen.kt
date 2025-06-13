@@ -1,5 +1,6 @@
 package com.example.dailypulse.android.screens
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,8 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -36,12 +41,15 @@ import com.example.dailypulse.articles.Article
 import com.example.dailypulse.articles.ArticlesViewModel
 
 @Composable
-fun ArticleScreen(articlesViewModel: ArticlesViewModel) {
+fun ArticleScreen(
+    onAboutButtonClick: () -> Unit,
+    articlesViewModel: ArticlesViewModel
+) {
 
     val articleState = articlesViewModel.articleState.collectAsState()
 
     Column {
-        AppBar()
+        AppBar(onAboutButtonClick)
 
         if (articleState.value.loading) Loader()
         if (articleState.value.error != null) ErrorMessage(articleState.value.error!!)
@@ -122,7 +130,13 @@ fun ArticleItemView(article: Article) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar() {
+fun AppBar(onAboutButtonClick: () -> Unit) {
     TopAppBar(
-        title = { Text(text = "Article") })
+        title = { Text(text = "Article") },
+        actions = {
+            IconButton(onClick = onAboutButtonClick) {
+                Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
+            }
+        }
+    )
 }

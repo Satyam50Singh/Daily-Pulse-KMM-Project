@@ -29,19 +29,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    AboutScreen()
-                    ArticleScreen(articlesViewModel)
+                    AppScaffold(articlesViewModel)
                 }
             }
         }
-    }
-}
-
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        AboutScreen()
     }
 }
