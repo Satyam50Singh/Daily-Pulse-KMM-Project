@@ -8,3 +8,25 @@ captures
 .cxx
 local.properties
 xcuserdata
+
+# iOS
+iosApp/Pods/
+iosApp/Podfile.lock
+iosApp/.symlinks/
+iosApp/DerivedData/
+iosApp/build/
+iosApp/xcuserdata/
+iosApp/*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Xcode
+*.xcuserstate
+*.xccheckout
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# SwiftPM
+.swiftpm/
+Package.resolved
+
+# Generated files
+shared.podspec
