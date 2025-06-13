@@ -2,10 +2,24 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.coTouchlabSkie)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 kotlin {
+    cocoapods {
+        version = "1.0.0"
+        summary = "KMM Shared Module"
+        homepage = "https://example.com"
+        ios.deploymentTarget = "13.0"
+        framework {
+            baseName = "shared"
+            isStatic = true
+        }
+    }
+
     androidTarget {
         compilations.all {
             compileTaskProvider.configure {
@@ -30,6 +44,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.core)
         }
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)

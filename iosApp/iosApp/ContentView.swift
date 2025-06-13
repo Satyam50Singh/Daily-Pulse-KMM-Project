@@ -6,9 +6,10 @@ struct ContentView: View {
     let platform = Platform()
     
 	var body: some View {
-        AboutScreen().onAppear{
-            platform.logSystemInfo()
-        }
+//         AboutScreen().onAppear{
+//             platform.logSystemInfo()
+//         }
+        ArticleScreen(viewModel: .init())
 	}
 }
 
