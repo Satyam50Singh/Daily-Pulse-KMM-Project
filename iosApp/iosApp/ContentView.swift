@@ -5,11 +5,25 @@ struct ContentView: View {
     
     let platform = Platform()
     
+    @State private var shouldOpenAbout = false
+    
 	var body: some View {
-//         AboutScreen().onAppear{
-//             platform.logSystemInfo()
-//         }
-        ArticleScreen(viewModel: .init())
+        NavigationStack {
+            ArticleScreen(viewModel: .init())
+                .toolbar {
+                    Button {
+                        shouldOpenAbout = true
+                    } label: {
+                        Label("About", systemImage: "info.circle").labelStyle(.titleAndIcon)
+                    }
+                    .popover(isPresented: $shouldOpenAbout) {
+                        AboutScreen().onAppear{
+                            platform.logSystemInfo()
+                        }
+                    }
+                }
+
+        }
 	}
 }
 
