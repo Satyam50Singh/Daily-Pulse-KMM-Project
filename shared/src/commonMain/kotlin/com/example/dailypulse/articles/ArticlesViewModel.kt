@@ -8,7 +8,8 @@ import kotlinx.coroutines.launch
 
 class ArticlesViewModel : BaseViewModel() {
 
-    private val _articleState: MutableStateFlow<ArticleState> = MutableStateFlow(ArticleState())
+    private val _articleState: MutableStateFlow<ArticleState> =
+        MutableStateFlow(ArticleState(loading = true))
 
     val articleState: StateFlow<ArticleState>
         get() = _articleState
@@ -19,25 +20,28 @@ class ArticlesViewModel : BaseViewModel() {
 
     private fun getArticle() {
         scope.launch {
-            _articleState.emit(ArticleState(article = listOf(), loading = true, error = null))
+            delay(2000)
+
+            _articleState.emit(
+                ArticleState(
+                    article = listOf(),
+                    loading = false,
+                    error = "Something went wrong!!"
+                )
+            )
+
+            delay(2000)
 
             val response = fetchArticles()
-
-            delay(2000)
-
-            _articleState.emit(ArticleState(article = listOf(), loading = false, error = "Something went wrong!!"))
-
-            delay(2000)
-
             _articleState.emit(ArticleState(article = response, loading = false, error = null))
         }
     }
 
-    suspend fun fetchArticles(): List<Article> {
+    private suspend fun fetchArticles(): List<Article> {
         return mockArticles
     }
 
-    val mockArticles = listOf(
+    private val mockArticles = listOf(
         Article(
             title = "Kotlin Multiplatform: The Future of Cross-Platform Apps",
             description = "Kotlin Multiplatform allows developers to share code across Android, iOS, web, and backend projects.",
