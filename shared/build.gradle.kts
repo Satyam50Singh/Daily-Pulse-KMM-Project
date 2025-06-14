@@ -45,12 +45,22 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.core)
+            // Core HTTP client
+            implementation(libs.ktor.client.core)
+
+            // Serialization (with Kotlinx)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+
+            // Logging
+            implementation(libs.ktor.client.logging)
         }
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
+            implementation(libs.ktor.client.android)
         }
         iosMain.dependencies {
-
+            implementation(libs.ktor.client.darwin)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

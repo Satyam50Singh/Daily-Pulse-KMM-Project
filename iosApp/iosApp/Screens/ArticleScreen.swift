@@ -50,10 +50,10 @@ struct ArticleScreen: View {
                 ErrorMessage(message:error)
             }
             
-            if (!viewModel.articleState.article.isEmpty) {
+            if !(viewModel.articleState.article ?? []) .isEmpty {
                 ScrollView {
                     LazyVStack(spacing:10){
-                        ForEach(viewModel.articleState.article, id: \.self) { article in
+                        ForEach(viewModel.articleState.article ?? [], id: \.self) { article in
                             ArticleItemView(article: article)
                         }
                     }
@@ -112,7 +112,7 @@ struct ArticleItemView: View {
                 .fontWeight(.bold)
             
             Text(article.description_)
-            Text(article.date).frame(maxWidth: .infinity, alignment: .trailing).foregroundStyle(.gray)
+            Text(article.date).frame(maxWidth: .infinity, alignment: .trailing).foregroundStyle(.gray).font(.caption)
         }
         .padding(16)
         .background(Color.white)

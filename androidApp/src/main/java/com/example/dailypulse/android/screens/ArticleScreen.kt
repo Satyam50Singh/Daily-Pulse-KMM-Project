@@ -52,18 +52,20 @@ fun ArticleScreen(
         AppBar(onAboutButtonClick)
 
         if (articleState.value.loading) Loader()
-        if (articleState.value.error != null) ErrorMessage(articleState.value.error!!)
-        if (articleState.value.article.isNotEmpty()) ArticleListView(articleState.value.article)
+        if (articleState.value.error != null) ErrorMessage(articleState.value.error)
+        if (!articleState.value.article.isNullOrEmpty()) ArticleListView(articleState.value.article)
     }
 
 }
 
 @Composable
-fun ErrorMessage(error: String) {
-    Box(
-        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
-    ) {
-        Text(text = error, style = TextStyle(fontSize = 28.sp, textAlign = TextAlign.Center))
+fun ErrorMessage(error: String?) {
+    if (!error.isNullOrEmpty()) {
+        Box(
+            modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
+        ) {
+            Text(text = error, style = TextStyle(fontSize = 28.sp, textAlign = TextAlign.Center))
+        }
     }
 }
 
@@ -81,10 +83,12 @@ fun Loader() {
 }
 
 @Composable
-fun ArticleListView(articles: List<Article>) {
+fun ArticleListView(articles: List<Article>?) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(articles) { article: Article ->
-            ArticleItemView(article)
+        if (articles != null) {
+            items(articles) { article: Article ->
+                ArticleItemView(article)
+            }
         }
     }
 }
@@ -101,15 +105,15 @@ fun ArticleItemView(article: Article) {
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current).data(article.imageUrl)
-                .placeholder(R.drawable.img_placeholder) // shown while loading
-                .error(R.drawable.err_placeholder)             // shown if image load fails
-                .crossfade(true)                           // fade-in effect
+                .placeholder(R.drawable.img_placeholder)
+                .error(R.drawable.err_placeholder)
+                .crossfade(true)
                 .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(180.dp) // Optional: define a fixed height
+                .height(180.dp)
                 .clip(RoundedCornerShape(8.dp))
         )
         Spacer(modifier = Modifier.height(4.dp))
