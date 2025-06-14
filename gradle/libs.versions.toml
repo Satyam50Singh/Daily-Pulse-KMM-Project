@@ -6,6 +6,7 @@ compose = "1.5.4"
 compose-material3 = "1.1.2"
 androidx-activityCompose = "1.8.0"
 kotlinxCoroutinesCore = "1.7.3"
+kotlinxDatetime = "0.6.2"
 ktorClientCore = "2.3.7"
 lifecycleViewmodelKtx = "2.9.1"
 navigationCompose = "2.9.0"
@@ -23,6 +24,7 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxCoroutinesCore" }
 
 # KTOR Networking Library

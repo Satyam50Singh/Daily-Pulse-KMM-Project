@@ -54,6 +54,9 @@ kotlin {
 
             // Logging
             implementation(libs.ktor.client.logging)
+
+            // DateTime
+            implementation(libs.kotlinx.datetime)
         }
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)

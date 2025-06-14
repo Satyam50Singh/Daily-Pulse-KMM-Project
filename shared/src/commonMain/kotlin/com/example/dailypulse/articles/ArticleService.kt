@@ -8,7 +8,7 @@ import io.ktor.client.request.get
 class ArticleService(private val httpClient: HttpClient) {
 
     private val country = "us"
-    private val category = "business"
+    private val category = "business" // sports
 
     suspend fun fetchArticles(): List<ArticleRaw>? {
         val response: ArticleResponse =
