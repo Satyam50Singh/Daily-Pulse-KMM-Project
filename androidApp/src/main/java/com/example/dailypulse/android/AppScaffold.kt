@@ -13,17 +13,18 @@ import com.example.dailypulse.android.screens.AboutScreen
 import com.example.dailypulse.android.screens.ArticleScreen
 import com.example.dailypulse.android.screens.Screens
 import com.example.dailypulse.articles.ArticlesViewModel
+import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun AppScaffold(articlesViewModel: ArticlesViewModel) {
+fun AppScaffold() {
 
     val navController = rememberNavController()
 
     Scaffold {
         AppNavHost(
             navController = navController,
-            modifier = Modifier.fillMaxSize().padding(it),
-            articlesViewModel
+            modifier = Modifier.fillMaxSize().padding(it)
         )
     }
 }
@@ -31,8 +32,7 @@ fun AppScaffold(articlesViewModel: ArticlesViewModel) {
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    modifier: Modifier = Modifier,
-    articlesViewModel: ArticlesViewModel
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
@@ -42,7 +42,6 @@ fun AppNavHost(
         composable(Screens.ARTICLES.route) {
             ArticleScreen(
                 onAboutButtonClick = { navController.navigate(Screens.ABOUT_DEVICE.route)},
-                articlesViewModel = articlesViewModel,
             )
         }
         composable(Screens.ABOUT_DEVICE.route) {

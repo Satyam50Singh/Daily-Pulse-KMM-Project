@@ -57,6 +57,8 @@ kotlin {
 
             // DateTime
             implementation(libs.kotlinx.datetime)
+
+            implementation(libs.koin.core)
         }
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
