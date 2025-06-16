@@ -2,10 +2,28 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
+    
+    let platform = Platform()
+    
+    @State private var shouldOpenAbout = false
+    
 	var body: some View {
-		Text(greet)
+        NavigationStack {
+            ArticleScreen(viewModel: .init())
+                .toolbar {
+                    Button {
+                        shouldOpenAbout = true
+                    } label: {
+                        Label("About", systemImage: "info.circle").labelStyle(.titleAndIcon)
+                    }
+                    .popover(isPresented: $shouldOpenAbout) {
+                        AboutScreen().onAppear{
+                            platform.logSystemInfo()
+                        }
+                    }
+                }
+
+        }
 	}
 }
 
