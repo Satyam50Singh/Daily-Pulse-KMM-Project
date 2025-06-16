@@ -12,6 +12,7 @@ ktorClientCore = "2.3.7"
 lifecycleViewmodelKtx = "2.9.1"
 navigationCompose = "2.9.0"
 skie = "0.8.0"
+sqlDelight = "2.0.1"
 
 [libraries]
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
@@ -41,6 +42,12 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinCore" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinCore" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinCore" }
 
+# SQL Delight Library
+coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
+native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
+android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -50,3 +57,4 @@ kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 coTouchlabSkie = { id = "co.touchlab.skie", version.ref = "skie" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+sql-delight = { id = "app.cash.sqldelight", version.ref = "sqlDelight"}

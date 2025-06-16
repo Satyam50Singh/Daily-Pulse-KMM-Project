@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.coTouchlabSkie)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.sql.delight)
 }
 
 kotlin {
@@ -59,13 +60,18 @@ kotlin {
             implementation(libs.kotlinx.datetime)
 
             implementation(libs.koin.core)
+
+            implementation(libs.coroutines.extensions)
+
         }
         androidMain.dependencies {
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
             implementation(libs.ktor.client.android)
+            implementation(libs.android.driver)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.native.driver)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -82,5 +88,13 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+sqldelight {
+    databases{
+        create(name = "DailyPulseDatabase") {
+            packageName = "com.example.dailypulse.db"
+        }
     }
 }
