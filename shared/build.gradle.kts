@@ -38,6 +38,7 @@ kotlin {
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
+            linkerOpts("-lsqlite3")
             isStatic = true
         }
     }
@@ -62,6 +63,8 @@ kotlin {
             implementation(libs.koin.core)
 
             implementation(libs.coroutines.extensions)
+
+            implementation(libs.stately.common)
 
         }
         androidMain.dependencies {

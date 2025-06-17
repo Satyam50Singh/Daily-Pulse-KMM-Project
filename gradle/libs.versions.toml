@@ -13,6 +13,7 @@ lifecycleViewmodelKtx = "2.9.1"
 navigationCompose = "2.9.0"
 skie = "0.8.0"
 sqlDelight = "2.0.1"
+statelyCommon = "1.2.5"
 
 [libraries]
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
@@ -46,6 +47,7 @@ koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", versi
 coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqlDelight" }
 native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqlDelight" }
 android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqlDelight" }
+stately-common = { module = "co.touchlab:stately-common", version.ref = "statelyCommon" }
 
 
 [plugins]
