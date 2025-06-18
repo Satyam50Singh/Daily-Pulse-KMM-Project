@@ -11,12 +11,15 @@ class ArticleService(private val httpClient: HttpClient) {
     private val category = "business" // sports
 
     suspend fun fetchArticles(): List<ArticleRaw>? {
-        val response: ArticleResponse =
-            httpClient.get("https://newsapi.org/v2/top-headlines?country=$country&category=${category}&apiKey=${Constants.API_KEY}")
-                .body()
-        if (response.status == "ok") {
-            return response.articles
+        return try {
+            val response: ArticleResponse =
+                httpClient.get("https://newsapi.org/v2/top-headlines?country=$country&category=${category}&apiKey=${Constants.API_KEY}")
+                    .body()
+            if (response.status == "ok") response.articles else null
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
         }
-        return null
     }
+
 }

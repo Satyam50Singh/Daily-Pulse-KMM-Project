@@ -10,8 +10,8 @@ import kotlin.math.abs
 
 class ArticleUseCase(private val repository: ArticleRepository) {
 
-    suspend fun getArticles(): List<Article>? {
-        val articleRaw = repository.getArticles()
+    suspend fun getArticles(forceRefresh: Boolean): List<Article>? {
+        val articleRaw = repository.getArticles(forceRefresh)
         return mapArticles(articleRaw)
     }
 
@@ -25,7 +25,9 @@ class ArticleUseCase(private val repository: ArticleRepository) {
 
     private fun getDaysAgo(date: String): String {
         val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
-        val days = today.daysUntil(Instant.parse(date).toLocalDateTime(TimeZone.currentSystemDefault()).date)
+        val days = today.daysUntil(
+            Instant.parse(date).toLocalDateTime(TimeZone.currentSystemDefault()).date
+        )
 
         val result = when {
             abs(days) > 1 -> "${abs(days)} days ago"

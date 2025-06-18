@@ -1,6 +1,6 @@
 package com.example.dailypulse.android.screens
 
-import android.graphics.drawable.Icon
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,6 +39,8 @@ import coil.request.ImageRequest
 import com.example.dailypulse.android.R
 import com.example.dailypulse.articles.Article
 import com.example.dailypulse.articles.ArticlesViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -52,9 +54,9 @@ fun ArticleScreen(
     Column {
         AppBar(onAboutButtonClick)
 
-        if (articleState.value.loading) Loader()
+        /*if (articleState.value.loading) Loader() */ // replaced by pull to refresh or swipe refresh
         if (articleState.value.error != null) ErrorMessage(articleState.value.error)
-        if (!articleState.value.article.isNullOrEmpty()) ArticleListView(articleState.value.article)
+        if (!articleState.value.article.isNullOrEmpty()) ArticleListView(articlesViewModel)
     }
 
 }
@@ -83,12 +85,19 @@ fun Loader() {
     }
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ArticleListView(articles: List<Article>?) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        if (articles != null) {
-            items(articles) { article: Article ->
-                ArticleItemView(article)
+fun ArticleListView(viewModel: ArticlesViewModel) {
+
+    val articlesList = viewModel.articleState.value.article
+    SwipeRefresh(
+        state = SwipeRefreshState(viewModel.articleState.value.loading),
+        onRefresh = { viewModel.getArticle(true) }) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            if (articlesList != null) {
+                items(articlesList) { article: Article ->
+                    ArticleItemView(article)
+                }
             }
         }
     }

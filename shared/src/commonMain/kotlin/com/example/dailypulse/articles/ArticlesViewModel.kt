@@ -1,14 +1,10 @@
 package com.example.dailypulse.articles
 
 import com.example.dailypulse.BaseViewModel
-import io.ktor.client.HttpClient
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
 
 class ArticlesViewModel(private val articleUseCase: ArticleUseCase) : BaseViewModel() {
 
@@ -22,9 +18,14 @@ class ArticlesViewModel(private val articleUseCase: ArticleUseCase) : BaseViewMo
         getArticle()
     }
 
-    private fun getArticle() {
+    fun getArticle(forceRefresh: Boolean = false) {
         scope.launch {
-            val response = articleUseCase.getArticles()
+
+            _articleState.emit(ArticleState(article = _articleState.value.article, loading = true))
+
+            delay(2000)
+
+            val response = articleUseCase.getArticles(forceRefresh)
 
             _articleState.emit(ArticleState(article = response, loading = false, error = null))
         }
