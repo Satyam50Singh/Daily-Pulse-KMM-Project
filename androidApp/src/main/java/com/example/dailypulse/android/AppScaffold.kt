@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dailypulse.android.screens.AboutScreen
 import com.example.dailypulse.android.screens.ArticleScreen
 import com.example.dailypulse.android.screens.Screens
+import com.example.dailypulse.android.screens.SourcesScreen
 import com.example.dailypulse.articles.presentation.ArticlesViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -24,7 +25,9 @@ fun AppScaffold() {
     Scaffold {
         AppNavHost(
             navController = navController,
-            modifier = Modifier.fillMaxSize().padding(it)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
         )
     }
 }
@@ -41,11 +44,17 @@ fun AppNavHost(
     ) {
         composable(Screens.ARTICLES.route) {
             ArticleScreen(
-                onAboutButtonClick = { navController.navigate(Screens.ABOUT_DEVICE.route)},
+                onAboutButtonClick = { navController.navigate(Screens.ABOUT_DEVICE.route) },
+                onSourcesButtonClick = { navController.navigate(Screens.SOURCES.route) }
             )
         }
+
         composable(Screens.ABOUT_DEVICE.route) {
-            AboutScreen(onUpButtonClick = {navController.popBackStack() })
+            AboutScreen(onUpButtonClick = { navController.popBackStack() })
+        }
+
+        composable(Screens.SOURCES.route) {
+            SourcesScreen(onBackClick = { navController.popBackStack() })
         }
     }
 }
