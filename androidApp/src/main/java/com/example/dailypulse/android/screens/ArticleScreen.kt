@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.dailypulse.android.R
-import com.example.dailypulse.articles.Article
-import com.example.dailypulse.articles.ArticlesViewModel
+import com.example.dailypulse.articles.domain.Article
+import com.example.dailypulse.articles.presentation.ArticlesViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshState
 import org.koin.androidx.compose.getViewModel

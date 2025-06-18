@@ -1,4 +1,4 @@
-package com.example.dailypulse.articles
+package com.example.dailypulse.articles.data
 
 import com.example.dailypulse.Constants
 import io.ktor.client.HttpClient

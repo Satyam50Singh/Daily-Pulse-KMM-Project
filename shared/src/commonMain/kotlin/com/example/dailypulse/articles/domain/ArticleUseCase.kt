@@ -1,5 +1,7 @@
-package com.example.dailypulse.articles
+package com.example.dailypulse.articles.domain
 
+import com.example.dailypulse.articles.data.ArticleRaw
+import com.example.dailypulse.articles.data.ArticleRepository
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone

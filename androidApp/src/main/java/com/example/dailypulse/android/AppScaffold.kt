@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dailypulse.android.screens.AboutScreen
 import com.example.dailypulse.android.screens.ArticleScreen
 import com.example.dailypulse.android.screens.Screens
-import com.example.dailypulse.articles.ArticlesViewModel
+import com.example.dailypulse.articles.presentation.ArticlesViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 

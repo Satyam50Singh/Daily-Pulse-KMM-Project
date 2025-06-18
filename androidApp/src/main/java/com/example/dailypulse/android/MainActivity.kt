@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.dailypulse.Platform
 import com.example.dailypulse.android.screens.AboutScreen
 import com.example.dailypulse.android.screens.ArticleScreen
-import com.example.dailypulse.articles.ArticlesViewModel
+import com.example.dailypulse.articles.presentation.ArticlesViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
