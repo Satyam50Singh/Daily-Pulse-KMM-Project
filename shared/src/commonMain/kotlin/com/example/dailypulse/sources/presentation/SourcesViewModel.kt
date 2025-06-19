@@ -24,13 +24,14 @@ class SourcesViewModel(private val sourcesUseCase: SourcesUseCase) : BaseViewMod
         scope.launch {
             delay(1000)
 
-            _sourcesState.emit(SourceState(loading = false, error = "Something went wrong!!"))
-
-            delay(1000)
-
             val response = sourcesUseCase.getSources()
 
-            _sourcesState.emit(SourceState(error = null, sources = response))
+            if (response.isNullOrEmpty()) {
+                _sourcesState.emit(SourceState(error = "No Sources Found!", loading = false, sources = null))
+            } else {
+                _sourcesState.emit(SourceState(error = null, sources = response))
+            }
+
         }
     }
 

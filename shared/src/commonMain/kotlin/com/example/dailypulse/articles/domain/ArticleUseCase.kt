@@ -14,10 +14,10 @@ class ArticleUseCase(private val repository: ArticleRepository) {
 
     suspend fun getArticles(forceRefresh: Boolean): List<Article>? {
         val articleRaw = repository.getArticles(forceRefresh)
-        return mapArticles(articleRaw)
+        return articleRaw?.let { mapArticles(it) }
     }
 
-    private fun mapArticles(articleRaw: List<ArticleRaw>?): List<Article>? {
+    private fun mapArticles(articleRaw: List<ArticleRaw>): List<Article>? {
         return articleRaw?.map { raw ->
             Article(
                 raw.title, raw.desc ?: "", getDaysAgo(raw.date), raw.imageUrl ?: ""

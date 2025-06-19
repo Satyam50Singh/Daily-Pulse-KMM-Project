@@ -3,6 +3,7 @@ package com.example.dailypulse.articles.presentation
 import com.example.dailypulse.BaseViewModel
 import com.example.dailypulse.articles.domain.Article
 import com.example.dailypulse.articles.domain.ArticleUseCase
+import com.example.dailypulse.sources.presentation.SourceState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +30,17 @@ class ArticlesViewModel(private val articleUseCase: ArticleUseCase) : BaseViewMo
 
             val response = articleUseCase.getArticles(forceRefresh)
 
-            _articleState.emit(ArticleState(article = response, loading = false, error = null))
+            if (response.isNullOrEmpty()) {
+                _articleState.emit(
+                    ArticleState(
+                        error = "No Articles Found!",
+                        loading = false,
+                        article = null
+                    )
+                )
+            } else {
+                _articleState.emit(ArticleState(article = response, loading = false, error = null))
+            }
         }
     }
 

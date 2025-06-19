@@ -4,7 +4,7 @@ class ArticleRepository(
     private val dataSource: ArticleDataSource,
     private val service: ArticleService
 ) {
-    suspend fun getArticles(forceRefresh: Boolean): List<ArticleRaw> {
+    suspend fun getArticles(forceRefresh: Boolean): List<ArticleRaw>? {
         if (forceRefresh) {
             dataSource.clearArticles()
             return articleRaws()
@@ -18,9 +18,12 @@ class ArticleRepository(
         return articlesList
     }
 
-    private suspend fun articleRaws(): List<ArticleRaw> {
+    private suspend fun articleRaws(): List<ArticleRaw>? {
         val fetchedArticles = service.fetchArticles()
-        dataSource.insertArticle(fetchedArticles!!)
-        return fetchedArticles
+        if (!fetchedArticles.isNullOrEmpty()) {
+            dataSource.insertArticle(fetchedArticles)
+            return fetchedArticles
+        }
+        return null
     }
 }

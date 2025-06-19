@@ -56,7 +56,7 @@ fun ArticleScreen(
     Column {
         AppBar(onAboutButtonClick, onSourcesButtonClick)
 
-        /*if (articleState.value.loading) Loader() */ // replaced by pull to refresh or swipe refresh
+        /* if (articleState.value.loading) Loader() */ // replaced by pull to refresh or swipe refresh
         if (articleState.value.error != null) ErrorMessage(articleState.value.error)
         if (!articleState.value.article.isNullOrEmpty()) ArticleListView(articlesViewModel)
     }
@@ -69,7 +69,7 @@ fun ErrorMessage(error: String?) {
         Box(
             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
         ) {
-            Text(text = error, style = TextStyle(fontSize = 28.sp, textAlign = TextAlign.Center))
+            Text(text = error, style = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center, color = Color.Gray))
         }
     }
 }
