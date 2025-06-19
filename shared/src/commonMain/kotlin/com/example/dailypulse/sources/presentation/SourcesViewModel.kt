@@ -2,12 +2,13 @@ package com.example.dailypulse.sources.presentation
 
 import com.example.dailypulse.BaseViewModel
 import com.example.dailypulse.sources.domain.Source
+import com.example.dailypulse.sources.domain.SourcesUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class SourcesViewModel : BaseViewModel() {
+class SourcesViewModel(private val sourcesUseCase: SourcesUseCase) : BaseViewModel() {
 
     private val _sourcesState: MutableStateFlow<SourceState> =
         MutableStateFlow(SourceState(loading = true))
@@ -27,7 +28,7 @@ class SourcesViewModel : BaseViewModel() {
 
             delay(1000)
 
-            val response = fetchSources()
+            val response = sourcesUseCase.getSources()
 
             _sourcesState.emit(SourceState(error = null, sources = response))
         }
