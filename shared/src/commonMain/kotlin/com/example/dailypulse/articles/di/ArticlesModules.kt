@@ -5,6 +5,7 @@ import com.example.dailypulse.articles.data.ArticleRepository
 import com.example.dailypulse.articles.data.ArticleService
 import com.example.dailypulse.articles.domain.ArticleUseCase
 import com.example.dailypulse.articles.presentation.ArticlesViewModel
+import com.example.dailypulse.sources.presentation.SourcesViewModel
 import org.koin.dsl.module
 
 val articlesModule = module {
@@ -13,5 +14,4 @@ val articlesModule = module {
     single<ArticlesViewModel> { ArticlesViewModel(get()) }
     single<ArticleDataSource> { ArticleDataSource(get()) }
     single<ArticleRepository> { ArticleRepository(get(), get()) }
-
 }

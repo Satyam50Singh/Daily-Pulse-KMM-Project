@@ -12,7 +12,7 @@ class SourcesViewModel : BaseViewModel() {
     private val _sourcesState: MutableStateFlow<SourceState> =
         MutableStateFlow(SourceState(loading = true))
 
-    val sourceState: StateFlow<SourceState>
+    val sourcesState: StateFlow<SourceState>
         get() = _sourcesState
 
     init {

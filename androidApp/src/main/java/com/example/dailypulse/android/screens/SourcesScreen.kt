@@ -39,7 +39,7 @@ fun SourcesScreen(
     viewModel: SourcesViewModel = getViewModel()
 ) {
 
-    val sourceState = viewModel.sourceState.collectAsState()
+    val sourceState = viewModel.sourcesState.collectAsState()
 
     Column {
         CustomAppBar(onBackClick)
@@ -54,7 +54,7 @@ fun SourcesScreen(
 @Composable
 fun SourcesView(viewModel: SourcesViewModel) {
 
-    val sources = viewModel.sourceState.value.sources
+    val sources = viewModel.sourcesState.value.sources
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         if (sources?.isNotEmpty() == true) {
