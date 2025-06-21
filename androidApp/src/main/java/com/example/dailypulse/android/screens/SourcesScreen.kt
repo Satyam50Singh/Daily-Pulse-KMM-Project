@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dailypulse.sources.domain.Source
 import com.example.dailypulse.sources.presentation.SourcesViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
 import org.koin.androidx.compose.getViewModel
 
 @Composable
@@ -44,7 +46,7 @@ fun SourcesScreen(
     Column {
         CustomAppBar(onBackClick)
 
-        if (sourceState.value.loading) Loader()
+        /*if (sourceState.value.loading) Loader()*/
         if (sourceState.value.error != null) ErrorMessage(sourceState.value.error)
         if (sourceState.value.sources.isNullOrEmpty() == false) SourcesView(viewModel)
     }
@@ -56,10 +58,14 @@ fun SourcesView(viewModel: SourcesViewModel) {
 
     val sources = viewModel.sourcesState.value.sources
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        if (sources?.isNotEmpty() == true) {
-            items(sources) { source ->
-                SourceItemView(source)
+    SwipeRefresh(
+        state = SwipeRefreshState(isRefreshing = viewModel.sourcesState.value.loading),
+        onRefresh = { viewModel.getSources(true) }) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            if (sources?.isNotEmpty() == true) {
+                items(sources) { source ->
+                    SourceItemView(source)
+                }
             }
         }
     }

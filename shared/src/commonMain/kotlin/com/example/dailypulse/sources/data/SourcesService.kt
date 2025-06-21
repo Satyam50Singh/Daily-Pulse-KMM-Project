@@ -10,7 +10,10 @@ class SourcesService(private val httpClient: HttpClient) {
 
     suspend fun fetchSources(): List<SourcesRaw>? {
         return try {
-            val response: SourcesResponse = httpClient.get("$BASE_URL/top-headlines/sources?apiKey=$API_KEY").body()
+            val url = "$BASE_URL/top-headlines/sources?apiKey=$API_KEY"
+            println("URL - $url")
+            val response: SourcesResponse = httpClient.get(url).body()
+            println("Status: ${response.status} \nSourcesRaw: ${response.sourcesRaw}")
             if (response.status == "ok") response.sourcesRaw else null
         } catch (e: Exception) {
             e.printStackTrace()

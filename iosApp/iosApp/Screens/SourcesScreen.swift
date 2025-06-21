@@ -33,6 +33,10 @@ class SourcesViewModelWrapper: ObservableObject {
             }
         }
     }
+    
+    func refresh() {
+        sourcesViewModel.getSources(forceRefresh: true)
+    }
 }
 
 struct SourcesScreen: View {
@@ -81,6 +85,9 @@ struct SourcesContentView: View {
             .padding(.horizontal, 12)
             .padding(.top, 4)
             .padding(.bottom, 16)
+        }
+        .refreshable {
+            viewModel.refresh()
         }
         .padding(.top, 0)
         .scrollContentBackground(.hidden)

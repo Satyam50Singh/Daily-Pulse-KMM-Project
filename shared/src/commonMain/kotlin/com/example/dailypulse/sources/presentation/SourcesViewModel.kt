@@ -1,6 +1,7 @@
 package com.example.dailypulse.sources.presentation
 
 import com.example.dailypulse.BaseViewModel
+import com.example.dailypulse.articles.presentation.ArticleState
 import com.example.dailypulse.sources.domain.Source
 import com.example.dailypulse.sources.domain.SourcesUseCase
 import kotlinx.coroutines.delay
@@ -20,14 +21,22 @@ class SourcesViewModel(private val sourcesUseCase: SourcesUseCase) : BaseViewMod
         getSources()
     }
 
-    fun getSources() {
+    fun getSources(forceRefresh: Boolean = false) {
         scope.launch {
-            delay(1000)
+            _sourcesState.emit(SourceState(sources = _sourcesState.value.sources, loading = true))
 
-            val response = sourcesUseCase.getSources()
+            delay(2000)
+
+            val response = sourcesUseCase.getSources(forceRefresh)
 
             if (response.isNullOrEmpty()) {
-                _sourcesState.emit(SourceState(error = "No Sources Found!", loading = false, sources = null))
+                _sourcesState.emit(
+                    SourceState(
+                        error = "No Sources Found!",
+                        loading = false,
+                        sources = null
+                    )
+                )
             } else {
                 _sourcesState.emit(SourceState(error = null, sources = response))
             }

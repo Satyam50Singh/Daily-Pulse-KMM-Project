@@ -27,17 +27,12 @@ struct ContentView: View {
                     }
                     .popover(isPresented: $shouldOpenAbout) {
                         AboutScreen().onAppear{
-                            platform.logSystemInfo()
+                            platform.logSystemInfo()    
                         }
                     }.popover(isPresented: $shouldOpenSources){
                         SourcesScreen()
                     }
                 }
-            
-            
-        }
-        .refreshable {
-            articlesScreen.viewModel.articlesViewModel.getArticle(forceRefresh: true)
         }
     }
 }

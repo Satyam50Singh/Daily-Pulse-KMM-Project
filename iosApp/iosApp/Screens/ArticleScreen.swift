@@ -30,6 +30,10 @@ extension ArticleScreen {
                 }
             }
         }
+        
+        func refresh() {
+            articlesViewModel.getArticle(forceRefresh: true)
+        }
     }
 }
 
@@ -57,6 +61,9 @@ struct ArticleScreen: View {
                             ArticleItemView(article: article)
                         }
                     }
+                }
+                .refreshable {
+                    viewModel.refresh()
                 }
             }
             

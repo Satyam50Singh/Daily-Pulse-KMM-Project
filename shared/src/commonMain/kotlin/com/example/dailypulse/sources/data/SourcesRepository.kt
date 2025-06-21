@@ -5,17 +5,26 @@ class SourcesRepository(
     private val dataSource: SourcesDataSource
 ) {
 
-    suspend fun getSources(): List<SourcesRaw>? {
+    suspend fun getSources(forceRefresh: Boolean): List<SourcesRaw>? {
+
+        if (forceRefresh) {
+            dataSource.clearSourcesDb()
+            return fetchSources()
+        }
 
         val sourcesRaw: List<SourcesRaw> = dataSource.getAllSources()
 
         if (sourcesRaw.isEmpty()) {
-            val fetchedSources: List<SourcesRaw>? = sourcesService.fetchSources();
-            fetchedSources?.let { dataSource.insertSource(it) }
-            return fetchedSources
+            return fetchSources()
         }
 
         return sourcesRaw
+    }
+
+    suspend fun fetchSources(): List<SourcesRaw>? {
+        val fetchedSources: List<SourcesRaw>? = sourcesService.fetchSources();
+        fetchedSources?.let { dataSource.insertSource(it) }
+        return fetchedSources
     }
 
 }

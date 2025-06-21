@@ -5,8 +5,8 @@ import com.example.dailypulse.sources.data.SourcesRepository
 
 class SourcesUseCase(private val sourcesRepository: SourcesRepository) {
 
-    suspend fun getSources(): List<Source>? {
-        val sourcesRaw = sourcesRepository.getSources()
+    suspend fun getSources(forceRefresh: Boolean): List<Source>? {
+        val sourcesRaw = sourcesRepository.getSources(forceRefresh)
         println("Sources Db has ${sourcesRaw?.size} records")
         return sourcesRaw?.let { mapSources(it) }
     }
