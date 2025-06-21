@@ -5,7 +5,7 @@ CREATE TABLE Article (
     imageUrl TEXT
 );
 
-CREATE TABLE Source (
+CREATE TABLE SourceEntity (
     id TEXT NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -27,13 +27,13 @@ removeAllArticles:
 DELETE FROM Article;
 
 insertSource:
-INSERT INTO Source(id, name, description, url, category, language, country)
+INSERT INTO SourceEntity(id, name, description, url, category, language, country)
 VALUES(?, ?, ?, ?, ?, ?, ?);
 
 selectAllSources:
-SELECT Source.*
-FROM Source;
+SELECT SourceEntity.*
+FROM SourceEntity;
 
 removeAllSources:
-DELETE FROM Source;
+DELETE FROM SourceEntity;
 
