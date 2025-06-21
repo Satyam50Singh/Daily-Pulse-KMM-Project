@@ -1,6 +1,6 @@
 package com.example.dailypulse.android.screens
 
-import android.graphics.drawable.Icon
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.List
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -37,24 +38,27 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.dailypulse.android.R
-import com.example.dailypulse.articles.Article
-import com.example.dailypulse.articles.ArticlesViewModel
+import com.example.dailypulse.articles.domain.Article
+import com.example.dailypulse.articles.presentation.ArticlesViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshState
 import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun ArticleScreen(
     onAboutButtonClick: () -> Unit,
+    onSourcesButtonClick: () -> Unit,
     articlesViewModel: ArticlesViewModel = getViewModel()
 ) {
 
     val articleState = articlesViewModel.articleState.collectAsState()
 
     Column {
-        AppBar(onAboutButtonClick)
+        AppBar(onAboutButtonClick, onSourcesButtonClick)
 
-        if (articleState.value.loading) Loader()
+        /* if (articleState.value.loading) Loader() */ // replaced by pull to refresh or swipe refresh
         if (articleState.value.error != null) ErrorMessage(articleState.value.error)
-        if (!articleState.value.article.isNullOrEmpty()) ArticleListView(articleState.value.article)
+        if (!articleState.value.article.isNullOrEmpty()) ArticleListView(articlesViewModel)
     }
 
 }
@@ -65,7 +69,7 @@ fun ErrorMessage(error: String?) {
         Box(
             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
         ) {
-            Text(text = error, style = TextStyle(fontSize = 28.sp, textAlign = TextAlign.Center))
+            Text(text = error, style = TextStyle(fontSize = 20.sp, textAlign = TextAlign.Center, color = Color.Gray))
         }
     }
 }
@@ -83,12 +87,19 @@ fun Loader() {
     }
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun ArticleListView(articles: List<Article>?) {
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        if (articles != null) {
-            items(articles) { article: Article ->
-                ArticleItemView(article)
+fun ArticleListView(viewModel: ArticlesViewModel) {
+
+    val articlesList = viewModel.articleState.value.article
+    SwipeRefresh(
+        state = SwipeRefreshState(viewModel.articleState.value.loading),
+        onRefresh = { viewModel.getArticle(true) }) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            if (articlesList != null) {
+                items(articlesList) { article: Article ->
+                    ArticleItemView(article)
+                }
             }
         }
     }
@@ -135,10 +146,13 @@ fun ArticleItemView(article: Article) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(onAboutButtonClick: () -> Unit) {
+private fun AppBar(onAboutButtonClick: () -> Unit, onSourcesButtonClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = "Article") },
         actions = {
+            IconButton(onClick = onSourcesButtonClick) {
+                Icon(imageVector = Icons.Outlined.List, contentDescription = null)
+            }
             IconButton(onClick = onAboutButtonClick) {
                 Icon(imageVector = Icons.Outlined.Info, contentDescription = null)
             }

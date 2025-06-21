@@ -1,4 +1,6 @@
-package com.example.dailypulse.articles
+package com.example.dailypulse.articles.presentation
+
+import com.example.dailypulse.articles.domain.Article
 
 data class ArticleState(
     val article: List<Article>? = listOf(),

@@ -17,7 +17,7 @@ extension ArticleScreen {
         
         
         init() {
-            articlesViewModel = ArticlesInjector().articlesViewModel
+            articlesViewModel = BaseInjector().articlesViewModel
             articleState = articlesViewModel.articleState.value
         }
         
@@ -30,6 +30,10 @@ extension ArticleScreen {
                 }
             }
         }
+        
+        func refresh() {
+            articlesViewModel.getArticle(forceRefresh: true)
+        }
     }
 }
 
@@ -40,7 +44,7 @@ struct ArticleScreen: View {
     
     var body: some View {
         VStack{
-            AppBar()
+            AppBar(title: "Articles")
             
             if viewModel.articleState.loading {
                 Loader()
@@ -58,6 +62,9 @@ struct ArticleScreen: View {
                         }
                     }
                 }
+                .refreshable {
+                    viewModel.refresh()
+                }
             }
             
         }.onAppear{
@@ -68,8 +75,9 @@ struct ArticleScreen: View {
 }
 
 struct AppBar: View {
+    var title: String
     var body: some View {
-        Text("Articles")
+        Text(title)
             .font(.largeTitle)
             .fontWeight(.bold)
     }

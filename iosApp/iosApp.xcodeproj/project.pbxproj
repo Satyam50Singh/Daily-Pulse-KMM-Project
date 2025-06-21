@@ -12,6 +12,8 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		5F1668112DFC733000A5C028 /* AboutDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1668102DFC733000A5C028 /* AboutDeviceView.swift */; };
 		5F1668152DFC73A500A5C028 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F1668142DFC73A500A5C028 /* AboutScreen.swift */; };
+		5F4553722E01E36B007D79A2 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F4553712E01E36B007D79A2 /* libsqlite3.tbd */; };
+		5F532C1E2E031F8D00AC80BC /* SourcesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F532C1D2E031F8D00AC80BC /* SourcesScreen.swift */; };
 		5FE1621A2DFBFCC900F2D7B9 /* ArticleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE162192DFBFCC900F2D7B9 /* ArticleScreen.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
@@ -35,6 +37,8 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		5F1668102DFC733000A5C028 /* AboutDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDeviceView.swift; sourceTree = "<group>"; };
 		5F1668142DFC73A500A5C028 /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
+		5F4553712E01E36B007D79A2 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		5F532C1D2E031F8D00AC80BC /* SourcesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcesScreen.swift; sourceTree = "<group>"; };
 		5FE162192DFBFCC900F2D7B9 /* ArticleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleScreen.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -46,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F4553722E01E36B007D79A2 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,7 @@
 				5F1668142DFC73A500A5C028 /* AboutScreen.swift */,
 				5FE162192DFBFCC900F2D7B9 /* ArticleScreen.swift */,
 				5F1668102DFC733000A5C028 /* AboutDeviceView.swift */,
+				5F532C1D2E031F8D00AC80BC /* SourcesScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -103,6 +109,7 @@
 		7555FFB0242A642200829871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5F4553712E01E36B007D79A2 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -199,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F532C1E2E031F8D00AC80BC /* SourcesScreen.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				5F1668112DFC733000A5C028 /* AboutDeviceView.swift in Sources */,

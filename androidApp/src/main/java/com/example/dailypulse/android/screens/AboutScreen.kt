@@ -31,12 +31,16 @@ fun AboutScreen(onUpButtonClick: () -> Unit) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(onUpButtonClick: () -> Unit) {
+private fun TopBar(onUpButtonClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = "About Device") },
         navigationIcon = {
             IconButton(onClick = onUpButtonClick) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null, tint = Color.White)
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = Color.White
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
