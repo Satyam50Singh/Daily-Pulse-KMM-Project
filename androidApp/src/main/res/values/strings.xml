@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Daily Pulse</string>
+    <string name="sources_data_will_be_available_soon">Sources data will be available soon.</string>
+</resources>
