@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -149,6 +150,8 @@ fun ArticleItemView(article: Article) {
 private fun AppBar(onAboutButtonClick: () -> Unit, onSourcesButtonClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = "Article") },
+        modifier = Modifier.height(56.dp),
+        windowInsets = WindowInsets(0),
         actions = {
             IconButton(onClick = onSourcesButtonClick) {
                 Icon(imageVector = Icons.Outlined.List, contentDescription = null)
