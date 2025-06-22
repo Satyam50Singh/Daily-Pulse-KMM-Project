@@ -1,11 +1,10 @@
 package com.example.dailypulse.android.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -61,7 +60,10 @@ fun SourcesView(viewModel: SourcesViewModel) {
     SwipeRefresh(
         state = SwipeRefreshState(isRefreshing = viewModel.sourcesState.value.loading),
         onRefresh = { viewModel.getSources(true) }) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
             if (sources?.isNotEmpty() == true) {
                 items(sources) { source ->
                     SourceItemView(source)
@@ -101,6 +103,7 @@ fun SourceItemView(source: Source) {
 fun CustomAppBar(onBackClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = "Sources") },
+        windowInsets = WindowInsets(0),    // remove default top padding
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(

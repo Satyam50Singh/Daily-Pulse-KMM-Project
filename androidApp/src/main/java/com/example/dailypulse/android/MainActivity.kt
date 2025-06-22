@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.view.WindowCompat
 import com.example.dailypulse.Platform
 import com.example.dailypulse.android.screens.AboutScreen
 import com.example.dailypulse.android.screens.ArticleScreen
@@ -21,11 +22,13 @@ class MainActivity : ComponentActivity() {
 
         Platform().logSystemInfo()
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     AppScaffold()
                 }
